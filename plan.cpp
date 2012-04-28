@@ -1,6 +1,6 @@
 #include "plan.h"
 #include "types.h"
-#include "matrixfftw.h"
+#include "matrixFFTW.h"
 
 plan::plan(matrixfftw& a,matrixfftw& b,int dir, int mode){
     p=fftw_plan_dft_2d(a.h, a.w ,a.in, b.in, dir, mode);

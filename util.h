@@ -2,7 +2,7 @@
 #define UTIL_H
 
 #include "tensor.h"
-#include "matrixfftw.h"
+#include "matrixFFTW.h"
 #include "wavematrix.h"
 #include <QImage>
 

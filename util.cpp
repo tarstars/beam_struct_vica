@@ -104,25 +104,27 @@ return ret;
 }*/
 
 WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t, double rho){
-    cout<<"create_w"<<endl;
-WaveMatrix ret(n);
-double omega(2*M_PI*f);
-for (int i=0; i<n; i++){
+  cout<<"create_w"<<endl;
+  WaveMatrix ret(n);
+  
+  double omega(2*M_PI*f);
+
+  for (int i=0; i<n; i++){
     for (int j=0; j<n; j++){
-        double s_1=0;
-        double s_2=0;
-        if (i<(n/2))
+      double s_1=0;
+      double s_2=0;
+      if (i<(n/2))
         {s_1=(1/a/f)*i;}
-        else { s_1=+(1/a/f)*i-2*(1/a/f)*(n/2);}
-        if (j<(n/2))
+      else { s_1=+(1/a/f)*i-2*(1/a/f)*(n/2);}
+      if (j<(n/2))
         {s_2=(1/a/f)*j;}
-        else {s_2=+(1/a/f)*j-2*(1/a/f)*(n/2);}
+      else {s_2=+(1/a/f)*j-2*(1/a/f)*(n/2);}
 
       ret(i,j)=WaveElement(s_1, s_2, t, rho, omega);
     }
-//getLog()<<endl;
-}
-
+    //getLog()<<endl;
+  }
+  
 return ret;
 }
 

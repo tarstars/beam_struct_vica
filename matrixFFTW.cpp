@@ -1,4 +1,4 @@
-#include "matrixfftw.h"
+#include "matrixFFTW.h"
 #include <fftw3.h>
 #include <complex>
 #include "types.h"

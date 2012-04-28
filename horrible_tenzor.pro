@@ -13,7 +13,7 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH+=C:\work\GnuWin32\include\
+INCLUDEPATH+=C:\\work\\GnuWin32\\include
 
 LIBS+= -lfftw3
 
@@ -30,7 +30,7 @@ SOURCES += main.cpp \
     wavecomposit.cpp \
     planewave.cpp \
     tests.cpp \
-    matrixfftw.cpp \
+    matrixFFTW.cpp \
     plan.cpp \
     storage.cpp
 
@@ -47,6 +47,6 @@ HEADERS += \
     waveelement.h \
     wavecomposit.h \
     planewave.h \
-    matrixfftw.h \
+    matrixFFTW.h \
     plan.h \
     storage.h
