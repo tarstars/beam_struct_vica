@@ -6,7 +6,7 @@
 class PolyMatrix;
 
 class Tensor;
-
+class Storage;
 class PlaneWave
 {
    // Vector3 slow, q, k;
@@ -16,7 +16,9 @@ public:
     Matrix3 S,T;
     PlaneWave();
     PlaneWave(double s1, double s2, double s3, const PolyMatrix& PolyMat, const Tensor& tens, double rho, double omega );
+    void incrementStorage(Storage& dat, int p, int q, std::complex<double> ampl)const;
     friend std::ostream& operator <<(std::ostream& os,const PlaneWave& r);
+    static int getDimensions();
 };
     std::ostream& operator <<(std::ostream& os,const PlaneWave& r);
 

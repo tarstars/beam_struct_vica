@@ -4,18 +4,18 @@
 #include "types.h"
 #include <iostream>
 
-class storage
+class Storage
 {
     int h;
-    int w;
     int d;
+    int w;
     std:: vector<CD> dat;
 public:
-    storage();
-    storage(int a, int b, int c);
-    CD& operator() (int i, int j,int k){return dat[k*h*w+i*w+j];};
-    const CD& operator() (int i, int j, int k)const{return dat[k*h*w+i*w+j];};
+    Storage();
+    Storage(int a, int b, int c);
+    CD& operator() (int k, int i,int j){return dat[k*d*w+i*w+j];};
+    const CD& operator() (int k, int i, int j)const{return dat[k*d*w+i*w+j];};
     std::ostream& operator>>(std::ostream& os)const;
 };
-std::ostream& operator<<(std::ostream& os, const storage& r);
+std::ostream& operator<<(std::ostream& os, const Storage& r);
 #endif // STORAGE_H

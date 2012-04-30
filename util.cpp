@@ -103,8 +103,8 @@ static ofstream ret("sz.txt");
 return ret;
 }*/
 
-WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t, double rho){
-  cout<<"create_w"<<endl;
+WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t,const Vector3& force, double rho){
+
   WaveMatrix ret(n);
   
   double omega(2*M_PI*f);
@@ -120,7 +120,7 @@ WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t, double 
         {s_2=(1/a/f)*j;}
       else {s_2=+(1/a/f)*j-2*(1/a/f)*(n/2);}
 
-      ret(i,j)=WaveElement(s_1, s_2, t, rho, omega);
+      ret(i,j)=WaveElement(s_1, s_2, t,force, rho, omega);
     }
     //getLog()<<endl;
   }
@@ -131,12 +131,10 @@ return ret;
 Matrix3 create_tensor_S(const Vector3& k,const Vector3& q){
     Matrix3 res;
     for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++){
-        res(i,j)=1./2*(q(i)*k(j)+q(j)*k(i));
-
+        for (int j=0; j<3; j++){
+            res(i,j)=1./2*(q(i)*k(j)+q(j)*k(i));
+        }
     }
-    }
-
     return res;
 };
 

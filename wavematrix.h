@@ -2,15 +2,19 @@
 #define WAVEMATRIX_H
 #include "waveelement.h"
 #include <vector>
-using namespace std;
+class Storage;
 class WaveMatrix
 {
     int n;
-    vector <WaveElement> dat;
+    std::vector <WaveElement> dat;
 public:
     WaveMatrix(int n);
-    WaveElement& operator() (int i, int j){return dat[i*n+j];};
-    const WaveElement& operator() (int i, int j)const{return dat[i*n+j];};
+    WaveElement& operator() (int i, int j){return dat[i*n+j];}
+    const WaveElement& operator() (int i, int j)const{return dat[i*n+j];}
+    void loadFFTW(const matrixfftw& r);
+    Storage getStorage()const;
+    friend std::ostream& operator<<(std::ostream& os, const WaveMatrix&);
 };
+std::ostream& operator<<(std::ostream& os, const WaveElement& r);
 
 #endif // WAVEMATRIX_H

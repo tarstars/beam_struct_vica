@@ -13,8 +13,8 @@ CompositWave::CompositWave()
 {
 }
 
-CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,double omega){
-  cout<<"from composite wave"<<"  "<<s_1<<"  "<<s_2<<endl;
+CompositWave::CompositWave(double s_1, double s_2, const Tensor& t,const Vector3& force, double rho,double omega){
+
   PolyMatrix p=t.make_polyMatrix(rho,s_1,s_2);
   Polinom d;
   d=p.Determinant();
@@ -40,6 +40,7 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
 
   for (int r=0; r<3; ++r){
     pav[r]=PlaneWave(s_1,s_2, fplus[r], p, t, rho, omega);
+   // cout<<pav[r];
   }
 
   Matrix3 work;
@@ -58,13 +59,15 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
   ves<<endl<<endl;
   ves<<"vesa"<<endl;
 
-  Vector3 force;
-  force(0)=0.6;
-  force(1)=0.8;
-  force(2)=0;
+ /* Vector3 force;
+  force(0)=0.2;
+  force(1)=0.3;
+  force(2)=0.4;
+  force.normalize();*/
+
   double determ=work.det(work);
 
-  /*for (int i=0; i<3; i++){
+  for (int i=0; i<3; i++){
     Matrix3 work_dop=work;
     for (int k=0; k<3; k++){
     work_dop(k,i)=force(k);}
@@ -75,10 +78,15 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
     //cout<<weight(i)<<endl;
     ves<<"x"<<i<<"=det_dop/determ= "<<weight(i)<<endl<<endl;
     }
-    cout<<endl<<endl;*/
-
-
-  storage stor(10,10,15);
+    cout<<endl<<endl;
+}
+void
+CompositWave::incrementStorage(Storage& dat, int p, int q,const complex<double>& ampl)const{
+    for (int f=0;f<3; f++){
+        pav[f].incrementStorage(dat,p,q,ampl*weight(f));
+    }
+}
+ /* Storage stor(10,10,15);
 
   Matrix3 resul;
   for(int i=0; i<3; ++i){
@@ -113,7 +121,7 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
   }
   ves<<"pri slojenii s vesami 3-h q"<<endl;
   ves<<resul_q<<endl;
-
+  l=0;
   vector<double> q_vec(3);
   for (int i=0; i<3; i++){
     q_vec.at(l)=resul_q(i);
@@ -127,7 +135,7 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
 
 }
 
-/*storage serialize (int p, int q){
+storage serialize (int p, int q){
     Matrix3 resul;
     for(int i=0; i<3; ++i){
         ves<<endl<<pav[i].T<<endl;
@@ -161,7 +169,8 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t, double rho,d
 std::ostream& operator<<(std::ostream& os, const CompositWave& r){
     os<<"composit wave:"<<endl;
     for(int t=0; t<3; ++t){
-    os<<r.pav[t]<<endl;
+        os<<"amplitude for plane wave  "<<r.weight(t)<<endl;
+        os<<r.pav[t]<<endl;
     }
 
     return os;

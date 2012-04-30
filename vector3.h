@@ -13,6 +13,7 @@ public:
     double& operator() (int i);
    const double& operator() (int i)const;
     void normalize();
+    double abs();
     Vector3 real_part();
     Vector3 image_part();
     std::ostream& operator>>(std::ostream& os)const;
