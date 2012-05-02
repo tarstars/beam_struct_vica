@@ -50,7 +50,11 @@ Vector3::normalize()// Vector3::normalize - ф-ция нормалайз принадл. классу вект
   y=y/a;
   z=z/a;
 }
-
+ double
+ Vector3::abs(){
+ double a=sqrt (x*x+y*y+z*z);
+ return a;
+ }
 
 
 

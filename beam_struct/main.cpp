@@ -6,7 +6,7 @@
 #include <fstream>
 //#include "matrix3.h"
 //#include "matrix.h"
-//#include <conio.h>
+#include <conio.h>
 //#include "polinom.h"
 #include "polymatrix.h"
 //#include "tensor.h"
@@ -15,6 +15,7 @@
 #include <algorithm>
 #include "wavematrix.h"
 #include "plan.h"
+#include "storage.h"
 using namespace std;
 
 
@@ -88,6 +89,21 @@ void work(){
   }
 }
 
+void
+testStorage(){
+  int h = 3, d = 4, w = 5;
+
+  Storage dat(h, d, w);
+
+  for(int t = 0; t < h; ++t)
+    for(int p = 0; p < d; ++p)
+      for(int q = 0; q < w; ++q)
+ dat(t, p, q) = (t + 1) * 100 + (p + 1) * 10 + (q + 1);
+
+  cout << "storage: " << endl << dat << endl << endl;
+
+}
+
 void work_1(){
   int n=10;
   double rho=5.96e3;
@@ -95,35 +111,38 @@ void work_1(){
   double f=100e6;//частота в герцах
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
   Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
- 
+  Vector3 force(0.2,0.3,0.4);
+  force.normalize();
    
   try{
-    WaveMatrix waves=create_wave_matrix(n, a, f, t, rho);
-    //matrixfftw amat=pic_to_mat("fp.png");
+    WaveMatrix waves=create_wave_matrix(n, a, f, t,force, rho);
+    matrixfftw amat=pic_to_mat("fp.png");
+    matrixfftw amatf(amat.height(),amat.width());
+    plan ap(amat, amatf, FFTW_FORWARD, FFTW_ESTIMATE);
+    ap.exec();
+    cout<<endl<<"  furie"<<endl;
+   /* for (int i=0; i<amatf.height(); i++){
+        for (int j=0; j<amatf.width(); j++){
+            cout<<" "<<i<<" "<<j<<endl;
+            cout<<amatf(i,j)<<endl<<endl;
+        }
+    }*/
+    waves.loadFFTW(amatf);
+    //cout<<waves<<endl;
+
+    Storage dat=waves.getStorage();
+    cout<<dat<<endl;
   }catch(string msg){cout<<"error:"<<msg<< endl;}
-  
-
-  /* matrixfftw amatf(amat.height(),amat.width());
-     plan ap(amat, amatf, FFTW_FORWARD, FFTW_ESTIMATE);
-     ap.exec();
-     cout<<endl<<"  furie"<<endl;
-     for (int i=0; i<amatf.height(); i++){
-     for (int j=0; j<amatf.width(); j++){
-     cout<<" "<<i<<" "<<j<<endl;
-     cout<<amatf(i,j)<<endl<<endl;
-     }
-     }*/
-
-
 }
 
 void test_composit_wave(){
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
   Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
   double rho=5.96e3;
-
+  Vector3 force(0.2,0.3,0.4);
+  force.normalize();
   try{
-    CompositWave cv(0.00001, 0.00002, t, rho, 2*M_PI*1e8 );
+    CompositWave cv(0.0, 0.0, t,force, rho, 2*M_PI*1e8 );
     cout<<endl;
     cout<<cv<<endl;
   }catch(string msg){cout<<"error: "<<msg<<endl;}
@@ -151,11 +170,11 @@ void testPol(){
 
 int main(int argc, char *argv[])
 {// Tensor t = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  // work_1();
-  //test_composit_wave();
+   work_1();
+ // testStorage();
   // testPol();
-  work_1();
-  //getch();
+ // test_composit_wave();
+  getch();
   return 0;
 
 }

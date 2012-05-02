@@ -78,15 +78,10 @@ using namespace std;
               vec0(i)=dat[0][i];
           }
 
-          vec0.normalize();
-
-
           Vector3 vec1;
           for (int i=0; i<3; i++){
               vec1(i)=dat[1][i];
           }
-
-          vec1.normalize();
 
 
           Vector3 vec2;
@@ -94,6 +89,51 @@ using namespace std;
               vec2(i)=dat[2][i];
           }
 
+          double l1=vec0.abs();
+          double l2=vec1.abs();
+          double l3=vec2.abs();
+
+          if (min(min(l1,l2),l3)<max(max(l1,l2),l3)*1e-7){
+              if(l1<min(l2,l3)){
+                  Vector3 pol;
+                  Vector3 uno=vec1;
+                  Vector3 dos=vec2;
+                  pol(0)=uno(1)*dos(2)-uno(2)*dos(1);
+                  pol(1)=dos(0)*uno(2)-uno(0)*dos(2);
+                  pol(2)=uno(0)*dos(1)-dos(0)*uno(1);
+
+                  pol.normalize();
+
+                  return pol;
+
+          }
+              if(l2<min(l1,l3)){
+                  Vector3 pol;
+                  Vector3 uno=vec0;
+                  Vector3 dos=vec2;
+                  pol(0)=uno(1)*dos(2)-uno(2)*dos(1);
+                  pol(1)=dos(0)*uno(2)-uno(0)*dos(2);
+                  pol(2)=uno(0)*dos(1)-dos(0)*uno(1);
+
+                  pol.normalize();
+
+                  return pol;}
+              if (l3<min(l2,l1)){
+                  Vector3 pol;
+                  Vector3 uno=vec0;
+                  Vector3 dos=vec1;
+                  pol(0)=uno(1)*dos(2)-uno(2)*dos(1);
+                  pol(1)=dos(0)*uno(2)-uno(0)*dos(2);
+                  pol(2)=uno(0)*dos(1)-dos(0)*uno(1);
+
+                  pol.normalize();
+
+                  return pol;
+              }
+          }
+
+          vec0.normalize();
+          vec1.normalize();
           vec2.normalize();
 
 
