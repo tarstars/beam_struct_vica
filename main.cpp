@@ -16,6 +16,7 @@
 #include "wavematrix.h"
 #include "plan.h"
 #include "storage.h"
+#include "spacialmatrix.h"
 using namespace std;
 
 
@@ -105,6 +106,8 @@ testStorage(){
 }
 
 void work_1(){
+    cout.precision(5);
+    cout<<scientific;
   int n=10;
   double rho=5.96e3;
   double a=0.05;//апертура в метрах
@@ -119,6 +122,7 @@ void work_1(){
     matrixfftw amat=pic_to_mat("fp.png");
     matrixfftw amatf(amat.height(),amat.width());
     plan ap(amat, amatf, FFTW_FORWARD, FFTW_ESTIMATE);
+    plan bp(amat,amatf,FFTW_BACKWARD, FFTW_ESTIMATE);
     ap.exec();
     cout<<endl<<"  furie"<<endl;
    /* for (int i=0; i<amatf.height(); i++){
@@ -131,7 +135,11 @@ void work_1(){
     //cout<<waves<<endl;
 
     Storage dat=waves.getStorage();
-    cout<<dat<<endl;
+    //cout<<dat<<endl;
+    Storage transform=layerTransform(dat,amat,amatf,bp);
+   // cout<<transform<<endl;
+    SpacialMatrix spaceMat=getSpaceMatrix(transform);
+    cout  << spaceMat << endl;
   }catch(string msg){cout<<"error:"<<msg<< endl;}
 }
 

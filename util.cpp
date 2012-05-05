@@ -1,7 +1,13 @@
-#include<iostream>
 #include "util.h"
 #include "math.h"
+#include "matrixFFTW.h"
+#include "storage.h"
+#include "plan.h"
+#include "spacialmatrix.h"
+
+#include<iostream>
 #include<fstream>
+
 using namespace std;
 
 int ind_conv(int a, int b) {
@@ -13,17 +19,18 @@ int ind_conv(int a, int b) {
 
    return mass[a][b];
 }
+
 ostream&
 operator<<(ostream& os, const vector<CD>& a){
-    for (int t=0; t<int(a.size()); ++t)
-        os<<a[t]<< " ";
+    for (int t = 0; t < int(a.size()); ++t)
+        os << a[t] << " ";
     return os;
 }
 
 ostream&
 operator<<(ostream& os, const vector<double>& a){
-    for (int t=0; t<int(a.size()); ++t)
-        os<<a[t]<< " ";
+    for (int t = 0; t < int(a.size()); ++t)
+        os << a[t] << " ";
     return os;
 }
 
@@ -40,15 +47,15 @@ Tensor make_material_tensor (double c11, double c12, double c13, double c33, dou
     };
 
 
-Tensor ret;
+    Tensor ret;
 
-for (int i = 0; i<3 ;++i)
-    for (int j = 0; j<3; ++j)
-        for (int k = 0; k<3; ++k)
-            for (int l = 0; l<3; l++)
-                ret(i,j,k,l) = mat[ind_conv(i,j)][ind_conv(k,l)];
+    for (int i = 0; i < 3 ;++i)
+        for (int j = 0; j < 3; ++j)
+            for (int k = 0; k < 3; ++k)
+                for (int l = 0; l < 3; l++)
+                    ret(i, j, k, l) = mat[ ind_conv(i, j)][ ind_conv(k, l)];
 
-return ret;
+    return ret;
 }
 
 double multiplic (int i) {
@@ -166,3 +173,37 @@ matrixfftw Mat1(h1,w1);
         }
     }
     return Mat1;}
+
+Storage layerTransform(const Storage& stor,matrixfftw& a,matrixfftw& b, plan& pl){
+    Storage stor_res(stor.height(),stor.depth(),stor.width());
+    for (int i=0; i<(PlaneWave::getDimensions()); i++){
+        for (int p=0; p<(stor.depth()); p++){
+            for (int q=0; q<(stor.width()); q++){
+                a(p,q)=stor(i,p,q);
+            }
+        }
+        pl.exec();
+        for (int p=0; p<(stor.depth()); p++){
+            for (int q=0; q<(stor.width()); q++){
+                stor_res(i,p,q)=b(p,q)/double(stor.depth()*stor.width());
+            }
+        }
+
+    }
+    return stor_res;
+}
+
+SpacialMatrix getSpaceMatrix(const Storage& stor){
+    if(stor.width()!=stor.depth())
+        throw (string ("getSpaceMatrix: dimensions in storage are mismatched"));
+
+    SpacialMatrix result(stor.width());
+    for (int p = 0; p < stor.depth(); p++){
+        for (int q = 0; q < stor.depth(); q++){
+            result(p, q).takeFromStorage(p, q, stor);
+        }
+    }
+
+
+    return result;
+}

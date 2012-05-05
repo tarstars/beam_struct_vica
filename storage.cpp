@@ -15,9 +15,14 @@ ostream&
 Storage::operator>>(ostream& os)const{
     os<<"y"<<endl;
     for (int k=0; k<h; ++k){
+        os<<k<<endl;
         for (int i=0; i<d; ++i){
             for (int j=0; j<w; ++j){
-                    os<< dat[k*d*w+i*w+j]<< "\t";
+                complex <double> val;
+                if(abs(dat[k*d*w+i*w+j])>1e-10){
+                    val=dat[k*d*w+i*w+j];
+                }
+                os<< val<< "\t";
             }
             os<<endl;
             }

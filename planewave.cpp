@@ -34,6 +34,7 @@ int
 PlaneWave::getDimensions(){
 return 15;
 }
+
 void
 PlaneWave::incrementStorage(Storage& dat, int p, int q, std::complex<double> ampl)const{
     dat(0,p,q)+=ampl*this -> q(0);

@@ -32,7 +32,11 @@ SOURCES += main.cpp \
     tests.cpp \
     matrixFFTW.cpp \
     plan.cpp \
-    storage.cpp
+    storage.cpp \
+    spacialmatrix.cpp \
+    vector3c.cpp \
+    planewave_c.cpp \
+    matrix3_c.cpp
 
 HEADERS += \
     tensor.h \
@@ -49,4 +53,8 @@ HEADERS += \
     planewave.h \
     matrixFFTW.h \
     plan.h \
-    storage.h
+    storage.h \
+    spacialmatrix.h \
+    vector3c.h \
+    planewave_c.h \
+    matrix3_c.h
