@@ -4,8 +4,7 @@
 #include <iostream>
 #include "vector3.h"
 
-class Matrix3
-            {
+class Matrix3 {
     double dat[3][3];
 public:
     Matrix3();
@@ -20,6 +19,8 @@ public:
     Vector3 operator*( const Vector3& ) const;
 
     double det(Matrix3);
+
+    void logState(std::ostream&)const;
 
     Matrix3 rotation(double phi, char p);
     Matrix3 operator* (double v)const;

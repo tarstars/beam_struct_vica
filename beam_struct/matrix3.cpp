@@ -178,6 +178,7 @@ Matrix3::operator*(double v)const{
     }
     return res;
 }
+
 Matrix3
 Matrix3::operator+ (const Matrix3& b)const{
     Matrix3 res;
@@ -188,4 +189,11 @@ Matrix3::operator+ (const Matrix3& b)const{
     }
     return res;
 
+}
+
+void
+Matrix3::logState(ostream& os)const{
+  for(int p = 0; p < 3; ++p)
+    for(int q = 0; q < 3; ++q)
+      os << (*this)(p,q) << " ";
 }

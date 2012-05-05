@@ -11,6 +11,8 @@ TARGET = horrible_tenzor
 CONFIG   += console
 CONFIG   -= app_bundle
 
+OBJECTS_DIR = tmp
+
 TEMPLATE = app
 
 INCLUDEPATH+=C:\\work\\GnuWin32\\include

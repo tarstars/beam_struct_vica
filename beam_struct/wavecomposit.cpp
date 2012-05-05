@@ -166,6 +166,16 @@ storage serialize (int p, int q){
     }
 }*/
 
+void
+CompositWave::logState(ostream& os)const{
+  os << "B_1 B_2 B_3 = " << weight(0) << " " << weight(1) << " " << weight(2) << " ";
+
+  for(int t = 0; t < 3; ++t){
+    os << "pv_" << t << ": ";
+    pav[t].logState(os);
+  }
+}
+
 std::ostream& operator<<(std::ostream& os, const CompositWave& r){
     os<<"composit wave:"<<endl;
     for(int t=0; t<3; ++t){

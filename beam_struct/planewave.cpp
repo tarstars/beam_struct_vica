@@ -59,3 +59,11 @@ PlaneWave::incrementStorage(Storage& dat, int p, int q, std::complex<double> amp
    /* for(int t = 0; t < 15; ++t)
         dat(t,p,q)=(t + 1) * 100 + 10 *(p+1) + q+1;*/
 }
+
+void
+PlaneWave::logState(ostream& os)const{
+  os << "s = " << slow  << " q = " << q << " k = " << k << " S = ";
+  S.logState(os);
+  os << " T = ";
+  T.logState(os);
+}
