@@ -2,9 +2,9 @@
 #define PLANEWAVE_C_H
 
 
-#include "Vector3c.h"
+#include "vector3c.h"
 #include "matrix3_c.h"
-#include "Storage.h"
+#include "storage.h"
 
 class PlaneWave_C
 {
