@@ -1,2 +1,3 @@
->>> import vica
->>> print vica.getCoolString()
+import vica
+
+print vica.getCoolString()

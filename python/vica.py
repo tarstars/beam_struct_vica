@@ -8,5 +8,6 @@ def integ(f,a,b):
       x+=dx
     result*=dx
     return result
+
 def getCoolString():
     return "snake"
