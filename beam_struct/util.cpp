@@ -122,17 +122,17 @@ WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t,const Ve
       double s_2=0;//j - hor
 
       if (i<(n/2)){
-	s_1=(1/a/f)*i;
+        s_2=(1/a/f)*i;
       }
       else { 
-	s_1=+(1/a/f)*i-2*(1/a/f)*(n/2);
+        s_2=+(1/a/f)*i-2*(1/a/f)*(n/2);
       }
 
       if (j<(n/2)){
-	s_2=(1/a/f)*j;
+        s_1=(1/a/f)*j;
       }
       else {
-	s_2=+(1/a/f)*j-2*(1/a/f)*(n/2);
+        s_1=+(1/a/f)*j-2*(1/a/f)*(n/2);
       }
 
       ret(i,j)=WaveElement(s_1, s_2, t,force, rho, omega);
@@ -198,6 +198,17 @@ Storage layerTransform(const Storage& stor,matrixfftw& a,matrixfftw& b, plan& pl
         }
 
     }
+ /*   matrixfftw testSour(stor.depth(),stor.width());
+    matrixfftw testDest(stor.depth(),stor.width());
+    plan test(testSour,testDest,FFTW_FORWARD,FFTW_ESTIMATE);
+    for (int p=0; p<(stor.depth()); p++){
+        for (int q=0; q<(stor.width()); q++){
+            testSour(p,q)=b(p,q);
+        }
+    }
+    test.exec();
+    cout<<endl<<endl;
+    cout<<testDest<<endl;*/
     return stor_res;
 }
 

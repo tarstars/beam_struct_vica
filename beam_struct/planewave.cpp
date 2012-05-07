@@ -45,8 +45,8 @@ PlaneWave::incrementStorage(Storage& dat, int p, int q, std::complex<double> amp
     dat(4,p,q)+=(S(1,1))*ampl;
     dat(5,p,q)+=(S(2,2))*ampl;
     dat(6,p,q)+=(S(1,2))*ampl;
-    dat(7,p,q)+=(S(0,1))*ampl;
-    dat(8,p,q)+=(S(0,2))*ampl;
+    dat(7,p,q)+=(S(0,2))*ampl;
+    dat(8,p,q)+=(S(0,1))*ampl;
 
     dat(9,p,q)+=(T(0,0))*ampl;
     dat(10,p,q)+=(T(1,1))*ampl;

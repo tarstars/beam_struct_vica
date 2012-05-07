@@ -20,6 +20,7 @@ for (int i=0; i<r.h; i++){
      for (int j=0; j<r.w; j++){
       os<<r(i,j);
      }
+     os<<endl;
      }
 return os;
 }

@@ -7,7 +7,7 @@
 #include <fstream>
 //#include "matrix3.h"
 //#include "matrix.h"
-//#include <conio.h>
+#include <conio.h>
 //#include "polinom.h"
 #include "polymatrix.h"
 //#include "tensor.h"
@@ -18,6 +18,7 @@
 #include "plan.h"
 #include "storage.h"
 #include "spacialmatrix.h"
+
 
 using namespace std;
 
@@ -144,14 +145,14 @@ void work_1(){
     waves.loadFFTW(amatf);
     //cout<<waves<<endl;
 
-    waves.logState(wavesLog);
+    //waves.logState(wavesLog);
 
     Storage dat=waves.getStorage();
-    //cout<<dat<<endl;
+   // cout<<dat<<endl;
     Storage transform=layerTransform(dat,amat,amatf,bp);
-    // cout<<transform<<endl;
-    SpacialMatrix spaceMat=getSpaceMatrix(transform);
-    cout  << spaceMat << endl;
+     cout<<transform<<endl;
+    //SpacialMatrix spaceMat=getSpaceMatrix(transform);
+    //cout  << spaceMat << endl;
   }catch(string msg){cout<<"error:"<<msg<< endl;}
 }
 
@@ -194,7 +195,7 @@ int main(int argc, char *argv[])
   // testStorage();
   // testPol();
   // test_composit_wave();
-  //getch();
+  getch();
   return 0;
 
 }
