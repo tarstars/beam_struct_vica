@@ -15,7 +15,8 @@ CompositWave::CompositWave()
 
 CompositWave::CompositWave(double s_1, double s_2, const Tensor& t,const Vector3& force, double rho,double omega){
 
-  PolyMatrix p=t.make_polyMatrix(rho,s_1,s_2);
+  PolyMatrix p=t.make_polyMatrix(rho, s_1, s_2);
+ 
   Polinom d;
   d=p.Determinant();
   vector<CD> f;
