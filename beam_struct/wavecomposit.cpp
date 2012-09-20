@@ -177,6 +177,13 @@ CompositWave::logState(ostream& os)const{
   }
 }
 
+void
+CompositWave::makeShift(double delta_z){
+    for (int i=0; i<3; ++i){
+        k[i]*=pav[i].calculate_phase(delta_z);
+    }
+}
+
 std::ostream& operator<<(std::ostream& os, const CompositWave& r){
     os<<"composit wave:"<<endl;
     for(int t=0; t<3; ++t){

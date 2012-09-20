@@ -1,5 +1,6 @@
 #ifndef PLANEWAVE_H
 #define PLANEWAVE_H
+#include <complex>
 
 #include "vector3.h"
 #include "matrix3.h"
@@ -21,6 +22,8 @@ public:
 
     void incrementStorage(Storage& dat, int p, int q, std::complex<double> ampl)const;
     void logState(std::ostream& os)const;
+
+    std::complex <double> calculate_phase(double delta_z);
 
     friend std::ostream& operator <<(std::ostream& os,const PlaneWave& r);
     static int getDimensions();

@@ -19,6 +19,11 @@ WaveElement::logState(ostream& os)const{
   cv.logState(os);
 }
 
+void
+WaveElement::makeShift(double delta_z){
+    cv.makeShift(delta_z);
+}
+
 ostream& operator<<(ostream& os, const WaveElement& r){
   os<<"WaveEl: "<<endl;
   os<<"A= "<<r.A<<endl;

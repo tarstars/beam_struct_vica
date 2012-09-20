@@ -13,7 +13,7 @@ WaveMatrix::WaveMatrix(int nn): n(nn), dat(nn*nn)
 
 void WaveMatrix::loadFFTW(const matrixfftw& r){
   if (r.width()!=n || r.height()!=n)
-    throw (string("dimension oe Wavematrix != dimension of furie"));
+    throw (string("dimension of Wavematrix != dimension of furie"));
   for (int i=0; i<n; i++){
     for (int j=0; j<n; j++){
       (*this)(i,j).setAmplitude(r(i,j));
@@ -56,4 +56,13 @@ WaveMatrix::getStorage()const{
     }
   }
   return dat;
+}
+
+void
+WaveMatrix::makeShift(double delta_z){
+    for (int i=0; i<n; ++i){
+        for (int j=0; j<n; ++j){
+            (*this)(i,j).makeShift(delta_z);
+        }
+    }
 }

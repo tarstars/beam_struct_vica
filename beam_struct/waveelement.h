@@ -19,6 +19,7 @@ public:
     void setAmplitude(const std::complex<double>& r);
     void incrementStorage(Storage& dat,int p, int q)const;
     void logState(std::ostream& os)const;
+    void makeShift(double delta_z);
 
     friend std::ostream& operator<<(std::ostream&, const WaveElement&);
 };

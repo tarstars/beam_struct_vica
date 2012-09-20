@@ -23,6 +23,7 @@ public:
     void loadFFTW(const matrixfftw& r);
     Storage getStorage()const;
     void logState(std::ostream&);
+    void makeShift(double delta_z);
 
     friend std::ostream& operator<<(std::ostream& os, const WaveMatrix&);
 };

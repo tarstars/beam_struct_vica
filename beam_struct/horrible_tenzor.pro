@@ -15,9 +15,9 @@ OBJECTS_DIR = tmp
 
 TEMPLATE = app
 
-INCLUDEPATH+=C:\\work\\GnuWin32\\include
+INCLUDEPATH+=C:\\work\\GnuWin32\\include D:\\backup\\work\\fftw-3
 
-LIBS+= -lfftw3
+LIBS+= -lfftw3-3 -LD:\\backup\\work\\fftw-3
 
 SOURCES += main.cpp \
     util.cpp \

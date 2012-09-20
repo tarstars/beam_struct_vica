@@ -35,6 +35,12 @@ PlaneWave::getDimensions(){
 return 15;
 }
 
+std::complex <double>
+PlaneWave::calculate_phase(double delta_z){
+    return exp(complex<double>(0,1)*delta_z*k(2));
+}
+
+
 void
 PlaneWave::incrementStorage(Storage& dat, int p, int q, std::complex<double> ampl)const{
     dat(0,p,q)+=ampl*this -> q(0);
