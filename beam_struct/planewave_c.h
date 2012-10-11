@@ -14,6 +14,9 @@ public:
     PlaneWave_C();
     void takeFromStorage(int i, int j,const Storage& stor);
     friend std::ostream& operator <<(std::ostream& os,const PlaneWave_C& r);
+    double getSquareAmplitude()const{
+        return q.norm();
+    }
 };
 
 std::ostream& operator << (std::ostream& os,const PlaneWave_C& r);

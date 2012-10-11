@@ -16,8 +16,8 @@ public:
     matrixfftw(const matrixfftw&);
     CD& operator()(int i,int j) {return *((CD*)(in+i*w+j));}
     const CD& operator()(int i,int j)const {return *((CD*)(in+i*w+j));}
-    int height()const{return h;};
-    int width()const{return w;};
+    int height()const{return h;}
+    int width()const{return w;}
     ~matrixfftw();
     void pd(std::ostream&)const;
     friend class plan;

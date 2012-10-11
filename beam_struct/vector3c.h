@@ -16,6 +16,9 @@ public:
        /* void normalize();
         double abs();*/
        std::ostream& operator>>(std::ostream& os)const;
+       double norm()const{
+           return (std::norm(x)+std::norm(y)+std::norm(z));
+       }
 };
 
 std::ostream& operator<<(std::ostream& os, const Vector3c& r);

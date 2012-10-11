@@ -5,6 +5,7 @@
 #include "matrixFFTW.h"
 #include "wavematrix.h"
 #include <QImage>
+#include <string.h>
 
 
 class Tensor;
@@ -12,6 +13,7 @@ class matrixfftw;
 class Storage;
 class plan;
 class SpacialMatrix;
+class matrix;
 
 std::vector <CD> image_part(std::vector<CD>) ;
 std::vector <double> real_part(std::vector<CD>);
@@ -32,5 +34,9 @@ Storage layerTransform(const Storage& stor,matrixfftw&a,matrixfftw&b, plan& pl);
 SpacialMatrix getSpaceMatrix(const Storage& stor);
 
 std::ostream& getLog();
+
+void saveAsPicture(const matrix& a, std::string flnm);
+void saveAsPictureFFTW(const matrixfftw& a, std::string flnm);
+
 
 #endif // UTIL_H

@@ -6,7 +6,6 @@
 
 QT       += core
 
-
 TARGET = horrible_tenzor
 CONFIG   += console
 CONFIG   -= app_bundle

@@ -10,6 +10,8 @@ class matrix
 public:
     matrix(int a, int b);
     matrix(){}
+    int width()const{return w;}
+    int height()const{return h;}
     double& operator() (int i, int j){return dat[i*w+j];};
     const double& operator() (int i, int j)const{return dat[i*w+j];};
     std::ostream& operator>>(std::ostream& os)const;

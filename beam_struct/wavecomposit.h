@@ -2,6 +2,7 @@
 #define COMPOSITWAVE_H
 
 #include "planewave.h"
+#include "planewave_c.h"
 
 class Tensor;
 class Storage;
@@ -9,7 +10,7 @@ class Storage;
 class CompositWave{
     std::complex<double> k[3];
 
-    Vector3 weight;
+    Vector3c weight;
     PlaneWave pav[3];
 
 public:

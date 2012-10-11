@@ -1,6 +1,7 @@
 #include "util.h"
 #include "math.h"
 #include "matrixFFTW.h"
+#include "matrix.h"
 #include "storage.h"
 #include "plan.h"
 #include "spacialmatrix.h"
@@ -222,7 +223,59 @@ SpacialMatrix getSpaceMatrix(const Storage& stor){
             result(p, q).takeFromStorage(p, q, stor);
         }
     }
-
-
     return result;
 }
+
+    void saveAsPicture(const matrix& a, string flnm){
+        cerr << "saveAsPicture: h = " << a.height() << " w = " << a.width() << endl;
+
+        QImage dest(a.width(), a.height(), QImage::Format_ARGB32_Premultiplied);
+
+        int w = a.width();
+        int h = a.height();
+        double minv = 0, maxv = 0;
+        minv = maxv = a(0,0);
+        for(int p = 0; p < h; ++p)
+            for(int q = 0; q < w; ++q){
+                double v = a(p,q);
+                minv = min(minv, v);
+                maxv = max(maxv, v);
+            }
+
+        for(int p = 0; p < h; ++p)
+            for(int q = 0; q < w; ++q){
+                double v = a(p,q);
+                int val = int(255 * (v - minv) / (maxv - minv));
+                dest.setPixel(q, p, qRgb(val, val, val));
+            }
+
+        dest.save(flnm.c_str());
+    }
+
+    void saveAsPictureFFTW(const matrixfftw& a, string flnm){
+        cerr << "saveAsPictureFFTW: h = " << a.height() << " w = " << a.width() << endl;
+     QImage dest(a.width(), a.height(), QImage::Format_ARGB32_Premultiplied);
+
+    int w = a.width();
+    int h = a.height();
+    double minv = 0, maxv = 0;
+    minv = maxv = abs(a(0,0));
+    for(int p = 0; p < h; ++p)
+      for(int q = 0; q < w; ++q){
+ double v = abs(a(p,q));
+ minv = min(minv, v);
+ maxv = max(maxv, v);
+      }
+
+    for(int p = 0; p < h; ++p)
+      for(int q = 0; q < w; ++q){
+ double v = abs(a(p,q));
+// if (v>(maxv/2)){
+ int val = int(255 * (v - minv) / (maxv - minv));
+ dest.setPixel(q, p, qRgb(val, val, val));
+    //  }
+// else dest.setPixel(q, p, qRgb(0, 0, 0));
+
+}
+    dest.save(flnm.c_str());
+  }

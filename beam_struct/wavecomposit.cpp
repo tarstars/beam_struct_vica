@@ -26,7 +26,7 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t,const Vector3
   for (int i=0; i<int(f.size()); i++){
     if (abs(imag(f[i]))>=eps) {
       stringstream dest;
-      dest<<"imaginary root in compvawe ("<<s_1<<","<<s_2<<")"<<endl;
+      dest<<"1imaginary root in compvawe ("<<s_1<<","<<s_2<<")"<<endl;
       throw (string(dest.str()));}
     if (real(f[i])<0) {fplus.push_back(real(f[i]));}
   }
@@ -87,85 +87,8 @@ CompositWave::incrementStorage(Storage& dat, int p, int q,const complex<double>&
         pav[f].incrementStorage(dat,p,q,ampl*weight(f));
     }
 }
- /* Storage stor(10,10,15);
-
-  Matrix3 resul;
-  for(int i=0; i<3; ++i){
-    // ves<<endl<<pav[i].T<<endl;
-    resul=resul+pav[i].T*weight(i);
-  }
-  ves<<"pri slojenii s vesami 3-h T"<<endl;
-  ves<<resul<<endl<<endl;
-
-  Matrix3 resul_S;                             //прибираем S
-  for(int i=0; i<3; ++i){
-    resul_S=resul_S+pav[i].S*weight(i);
-  }
-  ves<<"pri slojenii s vesami 3-h S"<<endl;
-  ves<<resul_S<<endl;
-
-  vector<double> s_vec(9);
-  int l=0;
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++){
-      s_vec.at(l)=resul_S(i,j);
-      l++;
-    }
-  }
-  for (int l=0; l<9;l++){
-    stor(1,0,l)=s_vec.at(l);
-  }
-
-  Vector3 resul_q;                        //прибираем q
-  for(int i=0; i<3; ++i){
-    resul_q=resul_q+pav[i].q*weight(i);
-  }
-  ves<<"pri slojenii s vesami 3-h q"<<endl;
-  ves<<resul_q<<endl;
-  l=0;
-  vector<double> q_vec(3);
-  for (int i=0; i<3; i++){
-    q_vec.at(l)=resul_q(i);
-    l++;
-  }
 
 
-  for (int j=0; j<3; j++){
-    stor(1,0,j+9)=q_vec.at(j);
-  }
-
-}
-
-storage serialize (int p, int q){
-    Matrix3 resul;
-    for(int i=0; i<3; ++i){
-        ves<<endl<<pav[i].T<<endl;
-        resul=resul+pav[i].T*weight(i);
-    }
-    ves<<"pri slojenii s vesami 3-h T"<<endl;
-    ves<<resul<<endl<<endl;
-
-    Matrix3 resul_S;
-    for(int i=0; i<3; ++i){
-        ves<<endl<<pav[i].S<<endl;
-        resul=resul+pav[i].S*weight(i);
-    }
-    ves<<"pri slojenii s vesami 3-h S"<<endl;
-    ves<<resul_S<<endl;
-
-}*/
-
-
-
-
-
-/*Matrix3 Serialize(vector3 weight)
-{
-    Matrix3 resul;
-    for(int i=0; i<3; ++i){
-        resul+=pav[i].T*weight(i);
-    }
-}*/
 
 void
 CompositWave::logState(ostream& os)const{
@@ -180,7 +103,7 @@ CompositWave::logState(ostream& os)const{
 void
 CompositWave::makeShift(double delta_z){
     for (int i=0; i<3; ++i){
-        k[i]*=pav[i].calculate_phase(delta_z);
+        weight(i)*=pav[i].calculate_phase(delta_z);
     }
 }
 
@@ -193,4 +116,4 @@ std::ostream& operator<<(std::ostream& os, const CompositWave& r){
 
     return os;
 
-};
+}
