@@ -22,3 +22,23 @@ SpacialMatrix::operator>>(ostream& os)const{
             }
     return os;
 }
+
+void
+SpacialMatrix::printv(std::ostream& os)const{
+    for (int i=0; i<n; i++){
+        for (int j=0; j<n; j++){
+            os<<(*this)(i,j).getSqrtV()<<"  ";
+        }
+        os<<endl;
+    }
+
+}
+
+void
+SpacialMatrix::fillSlice(int t,Storage& volume) {
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<n; j++) {
+            volume(t,i,j)=(*this)(i,j).getSqrtV();
+        }
+    }
+}

@@ -19,6 +19,7 @@ public:
     int height()const{return h;}
     int depth()const{return d;}
     int width()const{return w;}
+
 };
 std::ostream& operator<<(std::ostream& os, const Storage& r);
 #endif // STORAGE_H

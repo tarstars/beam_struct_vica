@@ -1,6 +1,7 @@
 #include "planewave_c.h"
 #include "storage.h"
 #include "vector3c.h"
+#include <complex>
 
 using namespace std;
 
@@ -42,3 +43,12 @@ PlaneWave_C::takeFromStorage(int i, int j, const Storage& stor){
     T(0,1)= stor(14, i, j);
 
 }
+
+double
+PlaneWave_C::getSqrtV()const{
+    double res=real(sqrt(q(0)*conj(q(0))+q(1)*conj(q(1))+q(2)*conj(q(2))));
+
+return res;
+}
+
+

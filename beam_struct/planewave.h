@@ -22,6 +22,7 @@ public:
     void incrementStorage(Storage& dat, int p, int q, std::complex<double> ampl)const;
     void logState(std::ostream& os)const;
 
+    double getKz();
     friend std::ostream& operator <<(std::ostream& os,const PlaneWave& r);
     static int getDimensions();
 };

@@ -21,8 +21,12 @@ public:
     const WaveElement& operator() (int i, int j)const{return dat[i*n+j];}
 
     void loadFFTW(const matrixfftw& r);
+
     Storage getStorage()const;
+
     void logState(std::ostream&);
+
+    void makeZShift (double);
 
     friend std::ostream& operator<<(std::ostream& os, const WaveMatrix&);
 };

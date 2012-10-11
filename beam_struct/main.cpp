@@ -109,6 +109,7 @@ testStorage(){
 }
 
 void work_1(){
+  ofstream dest("ыыыыы.txt");
   cout.precision(5);
   cout<<scientific;
 
@@ -117,6 +118,7 @@ void work_1(){
   double rho=5.96e3;
   double a=0.05;//апертура в метрах
   double f=100e6;//частота в герцах
+  double dz=1e-3; //на сколько сдвигаем плоскость по z
 
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
   Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
@@ -135,24 +137,27 @@ void work_1(){
     plan ap(amat, amatf, FFTW_FORWARD,  FFTW_ESTIMATE);
     plan bp(amat, amatf, FFTW_BACKWARD, FFTW_ESTIMATE);
     ap.exec();
-    cout<<endl<<"  furie"<<endl;
-    /* for (int i=0; i<amatf.height(); i++){
-       for (int j=0; j<amatf.width(); j++){
-       cout<<" "<<i<<" "<<j<<endl;
-       cout<<amatf(i,j)<<endl<<endl;
-       }
-       }*/
     waves.loadFFTW(amatf);
     //cout<<waves<<endl;
 
     //waves.logState(wavesLog);
+    int nz=10;
+    Storage volume(nz+1,n,n);
 
+    for (int t=0; t<=nz; t++){
+    waves.makeZShift(t*dz);
     Storage dat=waves.getStorage();
-   // cout<<dat<<endl;
-    Storage transform=layerTransform(dat,amat,amatf,bp);
-     cout<<transform<<endl;
-    //SpacialMatrix spaceMat=getSpaceMatrix(transform);
-    //cout  << spaceMat << endl;
+    Storage transform = layerTransform(dat,amat,amatf,bp);
+    SpacialMatrix spaceMat = getSpaceMatrix(transform);
+   // spaceMat.printv(cout);
+    spaceMat.fillSlice(t, volume);
+
+    cout<<endl<<endl;
+
+
+    }
+   dest<< "volume Stor is" << endl<< volume<<endl;
+
   }catch(string msg){cout<<"error:"<<msg<< endl;}
 }
 

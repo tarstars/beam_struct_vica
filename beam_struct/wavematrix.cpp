@@ -46,6 +46,14 @@ std::ostream& operator<<(std::ostream& os, const WaveMatrix &r){
   return os;
 }
 
+void
+WaveMatrix::makeZShift (double dz){
+for (int p=0; p<n; ++p)
+    for (int q=0; q<n; ++q)
+        (*this)(p,q).makeZShift(dz);
+};
+
+
 Storage
 WaveMatrix::getStorage()const{
   Storage dat(PlaneWave::getDimensions(),n,n);
