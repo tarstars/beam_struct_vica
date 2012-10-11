@@ -23,6 +23,7 @@
 using namespace std;
 
 void work_1(){
+  ofstream dest("ыыыыы.txt");
   cout.precision(5);
   cout<<scientific;
 
@@ -31,6 +32,7 @@ void work_1(){
 
 
   double rho=5.96e3;
+
   double a=0.015;//апертура в метрах
   double f=50e6;//частота в герцах
   double dz=a/n;// 5 milimeters
@@ -85,17 +87,11 @@ void work_1(){
     plan ap(amat, amatf, FFTW_FORWARD,  FFTW_ESTIMATE);
     plan bp(amat, amatf, FFTW_BACKWARD, FFTW_ESTIMATE);
     ap.exec();
-    cout<<endl<<"  furie"<<endl;
-    /* for (int i=0; i<amatf.height(); i++){
-       for (int j=0; j<amatf.width(); j++){
-       cout<<" "<<i<<" "<<j<<endl;
-       cout<<amatf(i,j)<<endl<<endl;
-       }
-       }*/
     waves.loadFFTW(amatf);
     //cout<<waves<<endl;
 
     //waves.logState(wavesLog);
+
     Storage AmplitudeSquare(nz,n,n);
     for (int i=0; i<nz; i++) {
         cout<<"  "<<i<<endl;
@@ -115,6 +111,25 @@ void work_1(){
     }
 
     saveAsPicture(res, "picture.png");
+
+   /* int nz=10;
+    Storage volume(nz+1,n,n);
+
+    for (int t=0; t<=nz; t++){
+    waves.makeZShift(t*dz);
+    Storage dat=waves.getStorage();
+    Storage transform = layerTransform(dat,amat,amatf,bp);
+    SpacialMatrix spaceMat = getSpaceMatrix(transform);
+   // spaceMat.printv(cout);
+    spaceMat.fillSlice(t, volume);
+
+    cout<<endl<<endl;
+
+
+    }
+   dest<< "volume Stor is" << endl<< volume<<endl;*/
+
+
   }catch(string msg){cout<<"error:"<<msg<< endl;}
 }
 

@@ -35,10 +35,18 @@ PlaneWave::getDimensions(){
 return 15;
 }
 
+
 std::complex <double>
 PlaneWave::calculate_phase(double delta_z){
     return exp(complex<double>(0,1)*delta_z*k(2));
 }
+
+
+
+/*double
+PlaneWave::getKz(){
+return k(2);
+}*/
 
 
 void

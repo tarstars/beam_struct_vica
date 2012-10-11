@@ -23,7 +23,7 @@ Storage::operator>>(ostream& os)const{
                 if(((k==11)||(k==12)||(k==13))&&abs(dat[k*d*w+i*w+j])<1e-10){
                     val=0;
                 }
-                os << val << "\t";
+                os <<real(val) << "\t";
                 // os<<dat[k*d*w+i*w+j]<<"\t";
             }
             os<<endl;

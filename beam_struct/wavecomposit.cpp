@@ -88,6 +88,13 @@ CompositWave::incrementStorage(Storage& dat, int p, int q,const complex<double>&
     }
 }
 
+/*
+void
+CompositWave::makeShift(double dz) {
+    for (int i=0; i<3; i++) {
+        weight(i)=weight(i)*exp(complex<double>(0,1)*dz*pav[i].getKz());
+    }
+}*/
 
 
 void

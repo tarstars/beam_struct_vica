@@ -13,6 +13,7 @@ public:
     Matrix3_c S,T;
     PlaneWave_C();
     void takeFromStorage(int i, int j,const Storage& stor);
+    double getSqrtV()const;
     friend std::ostream& operator <<(std::ostream& os,const PlaneWave_C& r);
     double getSquareAmplitude()const{
         return q.norm();

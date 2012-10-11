@@ -2,7 +2,9 @@
 #define COMPOSITWAVE_H
 
 #include "planewave.h"
-#include "planewave_c.h"
+//#include "planewave_c.h"
+#include "vector3c.h"
+
 
 class Tensor;
 class Storage;
@@ -20,8 +22,7 @@ public:
 
     void incrementStorage(Storage& dat, int p, int q, const std::complex<double>& ampl)const;
     void logState(std::ostream&)const;
-
-    void makeShift(double delta_z);
+    void makeShift(double dz);
 
     friend std::ostream& operator<<(std::ostream& os, const CompositWave& r);
    // storage serialize(double p,double q);
