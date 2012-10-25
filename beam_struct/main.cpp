@@ -7,7 +7,7 @@
 #include <fstream>
 //#include "matrix3.h"
 //#include "matrix.h"
-#include <conio.h>
+//#include <conio.h>
 //#include "polinom.h"
 #include "polymatrix.h"
 //#include "tensor.h"
@@ -18,6 +18,7 @@
 #include "plan.h"
 #include "storage.h"
 #include "spacialmatrix.h"
+#include <sstream>
 
 
 using namespace std;
@@ -38,7 +39,7 @@ void work_1(){
   double dz=a/n;// 5 milimeters
 
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  Tensor t=tt.rotation_for_VB_picture(0.0/180*M_PI);
+  Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
   PolyMatrix p;
   matrix mat(n,n);
          for (int i=0; i<n; i++){
@@ -74,7 +75,7 @@ void work_1(){
         }
         saveAsPictureFFTW(amatf, "furie_trancduser.png");
 
-  Vector3 force(0.2,0.3,0.4);
+  Vector3 force(1,0,0);
   force.normalize();
    
   ofstream wavesLog("waves_vica.log");
@@ -103,14 +104,17 @@ void work_1(){
         spaceMat.fillSliceWithV(i,AmplitudeSquare);
     }
 
+    for (int h=0;h<n;h++){
     matrix res(nz,n);
     for (int i=0; i<nz; i++){
         for (int j=0; j<n; j++){
-            res(i,j)=real(AmplitudeSquare(i,j,n/2));
+            res(i,j)=real(AmplitudeSquare(i,j,h));
         }
     }
-
-    saveAsPicture(res, "picture.png");
+    stringstream dest;
+    dest<<"picture"<<h<<".png";
+    saveAsPicture(res, dest.str());
+    }
 
    /* int nz=10;
     Storage volume(nz+1,n,n);
@@ -167,12 +171,12 @@ void testPol(){
 
 
 int main(int argc, char *argv[])
-{// Tensor t = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  work_1();
+{ // Tensor t = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
+    work_1();
   // testStorage();
   // testPol();
   // test_composit_wave();
-  getch();
+ // getch();
   return 0;
 
 }
