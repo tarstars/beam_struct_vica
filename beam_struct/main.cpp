@@ -39,7 +39,8 @@ void work_1(){
   double dz=a/n;// 5 milimeters
 
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
+  for (double g=100; g<180; g+=4){
+  Tensor t=tt.rotation_for_VB_picture(g/180*M_PI);
   PolyMatrix p;
   matrix mat(n,n);
          for (int i=0; i<n; i++){
@@ -59,7 +60,7 @@ void work_1(){
              }
          }
          cout<<mat;
-        saveAsPicture(mat, "mapa.png");
+        saveAsPicture(mat, "mapa.png",1);
         matrixfftw amat=pic_to_mat("D:\\backup\\progs\\horrible_tenzor-rar\\beam_struct_vica\\beam_struct\\fp_1.png");
         matrixfftw amatf(amat.height(),amat.width());
         plan ap(amat, amatf, FFTW_FORWARD,  FFTW_ESTIMATE);
@@ -104,7 +105,7 @@ void work_1(){
         spaceMat.fillSliceWithV(i,AmplitudeSquare);
     }
 
-    for (int h=0;h<n;h++){
+  /*  for (int h=0;h<n;h++){  //это делает дольки
     matrix res(nz,n);
     for (int i=0; i<nz; i++){
         for (int j=0; j<n; j++){
@@ -112,9 +113,20 @@ void work_1(){
         }
     }
     stringstream dest;
-    dest<<"picture"<<h<<".png";
-    saveAsPicture(res, dest.str());
+    double gamma=3.5;
+    dest<<"picture"<<h<<".png ";
+    saveAsPicture(res, dest.str(),gamma);
     }
+*/
+    matrix res(nz,n);   //поворот
+    for (int i=0; i<nz; i++){
+        for (int j=0; j<n; j++){
+            res(i,j)=real(AmplitudeSquare(i,j,51));
+        }
+    }
+    stringstream dest;
+    dest<<"picture"<<g<<".png";
+    saveAsPicture(res, dest.str(),1);
 
    /* int nz=10;
     Storage volume(nz+1,n,n);
@@ -135,7 +147,9 @@ void work_1(){
 
 
   }catch(string msg){cout<<"error:"<<msg<< endl;}
+  }
 }
+
 
 void test_composit_wave(){
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);

@@ -35,7 +35,7 @@ SpacialMatrix getSpaceMatrix(const Storage& stor);
 
 std::ostream& getLog();
 
-void saveAsPicture(const matrix& a, std::string flnm);
+void saveAsPicture(const matrix& a, std::string flnm, double gamma);
 void saveAsPictureFFTW(const matrixfftw& a, std::string flnm);
 
 

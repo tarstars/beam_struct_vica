@@ -226,7 +226,7 @@ SpacialMatrix getSpaceMatrix(const Storage& stor){
     return result;
 }
 
-    void saveAsPicture(const matrix& a, string flnm){
+    void saveAsPicture(const matrix& a, string flnm, double gamma){
         cerr << "saveAsPicture: h = " << a.height() << " w = " << a.width() << endl;
 
         QImage dest(a.width(), a.height(), QImage::Format_ARGB32_Premultiplied);
@@ -242,10 +242,17 @@ SpacialMatrix getSpaceMatrix(const Storage& stor){
                 maxv = max(maxv, v);
             }
 
+       minv=exp((log(minv))*gamma);
+        maxv=exp((log(maxv))*gamma);
+
         for(int p = 0; p < h; ++p)
             for(int q = 0; q < w; ++q){
                 double v = a(p,q);
-                int val = int(255 * (v - minv) / (maxv - minv));
+               int val = int(255 * (v - minv) / (maxv - minv));
+               // int valgamma=0;//int(255*exp((log(val))*gamma));
+               // int valgamma = int(255 * (vgamma - minv) / (maxv - minv));
+                /*int val = int(255 * (v - minv) / (maxv - minv));
+                int valgamma=int(exp((log(val))*gamma));*/
                 dest.setPixel(q, p, qRgb(val, val, val));
             }
 
