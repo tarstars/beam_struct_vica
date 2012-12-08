@@ -39,7 +39,7 @@ void work_1(){
   double dz=a/n;// 5 milimeters
 
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  for (double g=0; g<180; g+=1){
+  for (double g=90; g<180; g+=5){
   Tensor t=tt.rotation_for_VB_picture_1(g/180*M_PI);
   PolyMatrix p;
   matrix mat(n,n);
@@ -76,7 +76,7 @@ void work_1(){
         }
         saveAsPictureFFTW(amatf, "furie_trancduser.png");
 
-  Vector3 force(1,0,0);
+  Vector3 force(0,0,1);
   force.normalize();
    
   ofstream wavesLog("waves_vica.log");
@@ -125,7 +125,7 @@ void work_1(){
         }
     }
     stringstream dest;
-    dest<<"xy//picture"<<g<<".png";
+    dest<<"xy_fz//picture"<<g<<".png";
     saveAsPicture(res, dest.str(),1);
 
    /* int nz=10;
