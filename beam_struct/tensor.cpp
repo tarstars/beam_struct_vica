@@ -182,3 +182,51 @@ Tensor::operator>>(ostream& os)const{
   }
    return res;
   }
+
+  Tensor
+  Tensor:: rotation_for_VB_picture_1( double phi){
+      Matrix3 m;
+      Tensor res;
+     /* m(0,0)=-sin(phi)/(sqrt(2));
+      m(0,1)=cos(phi)/(sqrt(2));
+      m(0,2)=-1/(sqrt(2));
+      m(1,0)=-sin(phi)/(sqrt(2));
+      m(1,1)=cos(phi)/(sqrt(2));
+      m(1,2)= 1/(sqrt(2));
+      m(2,0)=cos(phi);
+      m(2,1)=sin(phi);
+      m(2,2)=0;*/
+      m(1,0)=0;
+      m(1,1)=0;
+      m(1,2)=1;
+      m(0,0)=cos(phi);
+      m(0,1)=sin(phi);
+      m(0,2)=0;
+      m(2,0)=-sin(phi);
+      m(2,1)=cos(phi);
+      m(2,2)=0;
+
+    //  cout<<"matrix m is"<<m<<endl<<endl<<endl;
+
+
+
+  for (int p=0; p<3; p++){
+      for (int q=0; q<3; q++){
+          for (int r=0; r<3; r++){
+              for (int s=0; s<3; s++){
+                 // res(p,q,r,s)=0;
+                  for( int i=0; i<3; i++){
+                      for (int j=0; j<3; j++){
+                          for (int k=0; k<3; k++){
+                              for (int l=0; l<3; l++){
+          res(p,q,r,s)+=dat[i][j][k][l]*m(p,i)*m(q,j)*m(r,k)*m(s,l);}
+      }
+      }
+      }
+      }
+      }
+      }
+  }
+   return res;
+  }
+

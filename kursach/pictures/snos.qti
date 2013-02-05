@@ -1,0 +1,232 @@
+QtiPlot 0.9.7 project file
+<scripting-lang>	muParser
+<windows>	4
+<table>
+Table1	130	2	13.11.2012 2:41:26
+geometry	277	0	711	703	
+header	1[X]	2[Y]
+ColWidth	100	100	
+<com>
+</com>
+ColType	0;0/13	0;0/13
+ReadOnlyColumn	0	0
+HiddenColumn	0	0
+Comments			
+WindowLabel		2
+<data>
+0	2.00000000000000e+00	1.87000000000000e+01
+1	4.00000000000000e+00	3.45000000000000e+01
+2	6.00000000000000e+00	4.42100000000000e+01
+3	8.00000000000000e+00	5.00000000000000e+01
+4	1.00000000000000e+01	5.40000000000000e+01
+5	1.20000000000000e+01	5.50000000000000e+01
+6	1.40000000000000e+01	5.60000000000000e+01
+7	2.00000000000000e+01	5.59000000000000e+01
+8	2.60000000000000e+01	5.31900000000000e+01
+9	3.00000000000000e+01	5.11400000000000e+01
+10	3.40000000000000e+01	4.87500000000000e+01
+11	3.80000000000000e+01	4.46000000000000e+01
+12	4.20000000000000e+01	4.20000000000000e+01
+13	4.60000000000000e+01	3.90000000000000e+01
+14	5.00000000000000e+01	3.65000000000000e+01
+15	5.40000000000000e+01	3.26000000000000e+01
+16	5.80000000000000e+01	2.90000000000000e+01
+17	6.20000000000000e+01	2.54100000000000e+01
+18	6.60000000000000e+01	2.09000000000000e+01
+19	7.00000000000000e+01	1.79000000000000e+01
+20	7.40000000000000e+01	1.45700000000000e+01
+21	7.80000000000000e+01	1.11300000000000e+01
+22	8.20000000000000e+01	6.84000000000000e+00
+23	8.60000000000000e+01	1.90000000000000e+00
+24	9.20000000000000e+01	-2.00000000000000e+00
+25	9.60000000000000e+01	-5.14000000000000e+00
+26	9.80000000000000e+01	-6.70000000000000e+00
+27	1.00000000000000e+02	-8.70000000000000e+00
+28	1.04000000000000e+02	-1.25800000000000e+01
+29	1.08000000000000e+02	-1.58000000000000e+01
+30	1.12000000000000e+02	-2.05000000000000e+01
+31	1.16000000000000e+02	-2.39000000000000e+01
+32	1.20000000000000e+02	-2.67000000000000e+01
+33	1.24000000000000e+02	-3.16000000000000e+01
+34	1.28000000000000e+02	-3.50200000000000e+01
+35	1.32000000000000e+02	-3.79000000000000e+01
+36	1.36000000000000e+02	-4.19000000000000e+01
+37	1.40000000000000e+02	-4.50000000000000e+01
+38	1.44000000000000e+02	-4.84000000000000e+01
+39	1.48000000000000e+02	-5.20000000000000e+01
+40	1.52000000000000e+02	-5.42000000000000e+01
+41	1.56000000000000e+02	-5.60000000000000e+01
+42	1.72000000000000e+02	-5.00000000000000e+01
+43	1.76000000000000e+02	-3.60000000000000e+01
+</data>
+</table>
+<TableStatistics>
+Table3	Table1	row	13.11.2012 2:51:08
+Targets	0
+geometry	-73	270	945	91	hidden
+header	Row[X]	Cols[Y]	Mean[Y]	StandardDev[Y]	StandardError[yEr]	Variance[Y]	Sum[Y]	Max[Y]	Min[Y]	N[Y]	Median[Y]
+ColWidth	100	100	100	100	100	100	100	100	100	100	100	
+<com>
+</com>
+ColType	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13	0;0/13
+ReadOnlyColumn	0	0	0	0	0	0	0	0	0	0	0
+HiddenColumn	0	0	0	0	0	0	0	0	0	0	0
+Comments												
+WindowLabel	Row Statistics of Table1	2
+</TableStatistics>
+<multiLayer>
+Graph1	1	1	24.11.2012 14:41:13
+geometry	444	2	759	575	active
+WindowLabel		2
+Margins	5	5	5	5
+Spacing	5	5
+LayerCanvasSize	400	300
+Alignement	0	0
+<AlignPolicy>0</AlignPolicy>
+<graph>
+ggeometry	5	5	734	503
+PlotTitle	Угол сноса Ψ от угла среза кристалла	#000000	4
+<Antialiasing>0</Antialiasing>
+Background	#ffffff	255
+Margin	0
+Border	0	#000000
+grid	0	0	0	0	#0000ff	0	0.5	#a0a0a4	2	0.4	#0000ff	0	0.5	#a0a0a4	2	0.4	0	0	2	0	0
+EnabledAxes	1	0	1	0	
+AxesTitles	Угол среза α, ∘	Угол сноса Ψ, ∘			
+AxesTitleColors	#000000	#000000	#000000	#000000	
+AxesTitleAlignment	4	4	4	4
+AxesTitleDistance	2	-1	2	-1
+TitleFont	MS Shell Dlg 2	13	75	0	0	0
+ScaleFont0	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont1	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont2	MS Shell Dlg 2	10	75	0	0	0
+ScaleFont3	MS Shell Dlg 2	10	75	0	0	0
+AxisFont0	MS Shell Dlg 2	10	50	0	0	0
+AxisFont1	MS Shell Dlg 2	10	50	0	0	0
+AxisFont2	MS Shell Dlg 2	10	50	0	0	0
+AxisFont3	MS Shell Dlg 2	10	50	0	0	0
+EnabledTickLabels	1	1	1	1
+AxesColors	#000000	#000000	#000000	#000000
+AxesNumberColors	#000000	#000000	#000000	#000000
+AxesBaseline	0	0	0	0	
+CanvasBackground	#ffffff	255
+curve	Table1_1	Table1_2	1	0	#000000	0	1	7	1	#000000	#000000	0	#000000	14	1	2	0	0	129	1
+<Function>
+<Type>0</Type>
+<Title>F1</Title>
+<Expression>-57.5*atan((4.84*cos((x+90)/57.5)*sin((x+90)/57.5))/(0.445*sin((x+90)/57.5)*sin((x+90)/57.5)+5.3*cos((x+90)/57.5)*cos((x+90)/57.5)))</Expression>
+<Variable>x</Variable>
+<Range>0	180</Range>
+<Points>100</Points>
+<Style>0</Style>
+<LineStyle>1</LineStyle>
+<Pen>
+	<Color>#ff0000</Color>
+	<Style>0</Style>
+	<Width>1</Width>
+</Pen>
+<xAxis>2</xAxis>
+<yAxis>0</yAxis>
+<CurveType>0</CurveType>
+<Visible>1</Visible>
+</Function>
+curve	Table4_1	Table4_2	1	0	#00ff00	0	1	11	2	#ff0000	#ffff00	0	#000000	14	3	2	0	0	29	1
+scale	0	-60	60	0	8	5	0	0
+scale	1	-60	60	0	8	5	0	0
+scale	2	0	180	30	4	5	0	0
+scale	3	0	180	30	6	5	0	0
+LabelsFormat	0	4	0	4	0	4	0	4
+AxisType	0	0	0	0	
+MajorTicks	1	1	1	1
+MinorTicks	1	1	1	1
+TicksLength	5	9
+DrawAxesBackbone	1	1	1	1	1
+AxesLineWidth	1
+LabelsRotation	0	0
+TickLabelsSpace	4	4	4	4
+ShowTicksPolicy	0	0	0	0
+<Legend>
+<Frame>0</Frame>
+<Color>#000000</Color>
+<FrameWidth>1</FrameWidth>
+<LineStyle>0</LineStyle>
+<x>9.7005988023952</x>
+<y>67.623529411765</y>
+<right>17.7844311377245</right>
+<bottom>59.1529411764706</bottom>
+<attachTo>0</attachTo>
+<Text>
+1
+</Text>
+<Font>MS Shell Dlg 2	12	50	0	0	0</Font>
+<TextColor>#000000</TextColor>
+<Background>#ffffff</Background>
+<Alpha>0</Alpha>
+<Angle>0</Angle>
+<AutoUpdate>0</AutoUpdate>
+<TeXOutput>0</TeXOutput>
+</Legend>
+<Legend>
+<Frame>0</Frame>
+<Color>#000000</Color>
+<FrameWidth>1</FrameWidth>
+<LineStyle>0</LineStyle>
+<x>88.652694610778</x>
+<y>13.694117647059</y>
+<right>96.7365269461078</right>
+<bottom>5.22352941176471</bottom>
+<attachTo>0</attachTo>
+<Text>
+2
+</Text>
+<Font>MS Shell Dlg 2	12	50	0	0	0</Font>
+<TextColor>#000000</TextColor>
+<Background>#ffffff</Background>
+<Alpha>0</Alpha>
+<Angle>0</Angle>
+<AutoUpdate>0</AutoUpdate>
+<TeXOutput>0</TeXOutput>
+</Legend>
+<Legend>
+<Frame>0</Frame>
+<Color>#000000</Color>
+<FrameWidth>1</FrameWidth>
+<LineStyle>0</LineStyle>
+<x>160.32934131737</x>
+<y>-43.341176470588</y>
+<right>168.413173652695</right>
+<bottom>-51.8117647058824</bottom>
+<attachTo>0</attachTo>
+<Text>
+3
+</Text>
+<Font>MS Shell Dlg 2	12	50	0	0	0</Font>
+<TextColor>#000000</TextColor>
+<Background>#ffffff</Background>
+<Alpha>0</Alpha>
+<Angle>0</Angle>
+<AutoUpdate>0</AutoUpdate>
+<TeXOutput>0</TeXOutput>
+</Legend>
+</graph>
+<LinkXAxes>0</LinkXAxes>
+</multiLayer>
+<table>
+Table4	30	2	24.11.2012 14:44:29
+geometry	0	0	445	220	
+header	1[X]	2[Y]
+ColWidth	100	100	
+<com>
+</com>
+ColType	0;0/13	0;0/13
+ReadOnlyColumn	0	0
+HiddenColumn	0	0
+Comments			
+WindowLabel		2
+<data>
+0	1.40000000000000e+01	5.60000000000000e+01
+1	8.60000000000000e+01	1.90000000000000e+00
+2	1.64000000000000e+02	-5.70000000000000e+01
+</data>
+</table>
+<open>1</open>
