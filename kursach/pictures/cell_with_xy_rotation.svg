@@ -15,7 +15,10 @@
    id="svg3083"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 8">
+   sodipodi:docname="cell_with_xy_rotation.svg"
+   inkscape:export-filename="/home/tass/prj/beam_struct_vica/kursach/pictures/cell_with_xy_rotation.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <defs
      id="defs3085">
     <marker
@@ -52,9 +55,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="337.32398"
-     inkscape:cy="708.54592"
+     inkscape:zoom="1.4"
+     inkscape:cx="318.6766"
+     inkscape:cy="699.5184"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
