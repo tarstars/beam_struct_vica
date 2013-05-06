@@ -45,7 +45,8 @@ Vector3::operator>>(ostream& os)const{
 
 void
 Vector3::normalize()// Vector3::normalize - ф-ция нормалайз принадл. классу вектор3
-{ double a =sqrt (x*x+y*y+z*z);
+{
+  double a =sqrt (x*x+y*y+z*z);
   x=x/a;
   y=y/a;
   z=z/a;

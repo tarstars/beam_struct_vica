@@ -18,6 +18,7 @@
 #include "plan.h"
 #include "storage.h"
 #include "spacialmatrix.h"
+#include "polinom.h"
 #include <sstream>
 
 
@@ -29,18 +30,18 @@ void work_1(){
   cout<<scientific;
 
   int n=100;
-  int nz=100;//количество шагов
+  int nz=1;//количество шагов
 
 
   double rho=5.96e3;
 
-  double a=0.015;//апертура в метрах
-  double f=50e6;//частота в герцах
-  double dz=a/n;// 5 milimeters
+  double a=0.005;//апертура в метрах
+  double f=20e6;//частота в герцах
+  double dz=a/n;// 0.15 milimeters
 
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  for (double g=90; g<180; g+=5){
-  Tensor t=tt.rotation_for_VB_picture_1(g/180*M_PI);
+  //for (double g=90; g<180; g+=5){ angle
+  Tensor t=tt.rotation_for_VB_picture_1(0/180*M_PI);
   PolyMatrix p;
   matrix mat(n,n);
          for (int i=0; i<n; i++){
@@ -61,7 +62,7 @@ void work_1(){
          }
          cout<<mat;
         saveAsPicture(mat, "mapa.png",1);
-        matrixfftw amat=pic_to_mat("D:\\backup\\progs\\horrible_tenzor-rar\\beam_struct_vica\\beam_struct\\fp_1.png");
+     /*   matrixfftw amat=pic_to_mat("D:\\backup\\progs\\horrible_tenzor-rar\\beam_struct_vica\\beam_struct\\fp_1.png");
         matrixfftw amatf(amat.height(),amat.width());
         plan ap(amat, amatf, FFTW_FORWARD,  FFTW_ESTIMATE);
         ap.exec();
@@ -74,7 +75,7 @@ void work_1(){
                  if (p>(n/2)&&q<(n/2)) {amatf(p,q)=amatf(n/2+n-p,n/2-q);}
             }
         }
-        saveAsPictureFFTW(amatf, "furie_trancduser.png");
+        saveAsPictureFFTW(amatf, "furie_trancduser.png");*/
 
   Vector3 force(0,0,1);
   force.normalize();
@@ -118,15 +119,25 @@ void work_1(){
     saveAsPicture(res, dest.str(),gamma);
     }
 */
-    matrix res(nz,n);   //поворот
-    for (int i=0; i<nz; i++){
+    ofstream matrixText;
+    matrixText.open("result_matrix.txt");
+    for (int i=0; i<n; i++)
+    {
+      for (int j=0; j<n; j++)
+      {
+        matrixText<<"  "<<AmplitudeSquare(0,i,j);
+      }
+      matrixText<<endl;
+    }
+    matrix res(n,n);   //поворот
+    for (int i=0; i<n; i++){
         for (int j=0; j<n; j++){
-            res(i,j)=real(AmplitudeSquare(i,51,j));
+            res(i,j)=real(AmplitudeSquare(0,i,j));
         }
     }
-    stringstream dest;
-    dest<<"xy_fz//picture"<<g<<".png";
-    saveAsPicture(res, dest.str(),1);
+   // stringstream dest;
+   // dest<<"xy_fz//picture"<<g<<".png";
+    saveAsPicture(res, "tryComplexRoot//vert_sechenye2.png",1);
 
    /* int nz=10;
     Storage volume(nz+1,n,n);
@@ -145,23 +156,30 @@ void work_1(){
     }
    dest<< "volume Stor is" << endl<< volume<<endl;*/
 
-
+  //} angle
   }catch(string msg){cout<<"error:"<<msg<< endl;}
-  }
 }
 
 
 void test_composit_wave(){
   Tensor tt = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-  Tensor t=tt.rotation_for_VB_picture(9.0/180*M_PI);
+  Tensor t=tt.rotation_for_VB_picture(0.0/180*M_PI);
   double rho=5.96e3;
-  Vector3 force(0.2,0.3,0.4);
+  Vector3 force(0,0,1);
   force.normalize();
-  try{
-    CompositWave cv(0.0, 0.0, t,force, rho, 2*M_PI*1e8 );
+  try
+  {
+    CompositWave cv(296e-6, 103e-6, t,force, rho, 2*M_PI*1e8 );
     cout<<endl;
     cout<<cv<<endl;
-  }catch(string msg){cout<<"error: "<<msg<<endl;}
+    Vector3c column=cv.TSum();
+    cout<<"force"<<endl<<column<<endl;
+    cout<<"matrix "<<endl<<cv<<endl;
+  }
+  catch(string msg)
+  {
+    cout<<"error: "<<msg<<endl;
+  }
 
 }
 
@@ -186,11 +204,12 @@ void testPol(){
 
 int main(int argc, char *argv[])
 { // Tensor t = make_material_tensor (5.6e10, 5.145e10, 2.2e10, 10.6e10, 6.6e10, 2.65e10);
-    work_1();
+   // work_1();
   // testStorage();
   // testPol();
-  // test_composit_wave();
+  test_composit_wave();
  // getch();
+
   return 0;
 
 }

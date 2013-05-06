@@ -23,7 +23,6 @@ PlaneWave::PlaneWave(double s1, double s2, double s3, const PolyMatrix& PolyMat,
    // plane.open("plane.txt");
     cout<<"plane wave:"<<endl;
     cout<<"slow: "<<r.slow<<endl<<endl;
-    //plane<<"slow: "<<r.slow<<endl<<endl;
     cout<<"q = "<<r.q<<endl;
     cout<<"k = "<<r.k<<endl;
     cout<<"tensor s= "<<r.S<<endl;

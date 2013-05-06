@@ -2,7 +2,7 @@
 #define COMPOSITWAVE_H
 
 #include "planewave.h"
-//#include "planewave_c.h"
+#include "planewave_c.h"
 #include "vector3c.h"
 
 
@@ -13,7 +13,7 @@ class CompositWave{
     std::complex<double> k[3];
 
     Vector3c weight;
-    PlaneWave pav[3];
+    PlaneWave_C pav[3];
 
 public:
 
@@ -23,6 +23,8 @@ public:
     void incrementStorage(Storage& dat, int p, int q, const std::complex<double>& ampl)const;
     void logState(std::ostream&)const;
     void makeShift(double dz);
+
+    Vector3c TSum ()const;
 
     friend std::ostream& operator<<(std::ostream& os, const CompositWave& r);
    // storage serialize(double p,double q);
