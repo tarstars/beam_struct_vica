@@ -15,6 +15,7 @@ public:
   //  Polinom detPoly();
     std::ostream& operator>>(std::ostream& os)const;
     Matrix3 evaluatePolyMatrix(double s_3)const;
+     Matrix3_c evaluatePolyMatrixC(std::complex<double> s_3)const;
 };
 std::ostream& operator<<(std::ostream& os, const PolyMatrix& r);
 #endif // POLYMATRIX_H

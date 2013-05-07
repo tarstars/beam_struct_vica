@@ -28,6 +28,19 @@ Matrix3 PolyMatrix::evaluatePolyMatrix(double s_3) const{
     return Matr;
 }
 
+Matrix3_c PolyMatrix::evaluatePolyMatrixC(std::complex<double> s_3) const{
+    Matrix3_c Matr;
+    for (int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+          RetVal p=(*this)(i,j).count(s_3);
+          Matr(i,j)=p.val;
+        }
+    }
+  //  cout<<Matr<<endl;
+    return Matr;
+}
+
+
 Polinom PolyMatrix::Determinant()const{
     Polinom c;
     c=dat[0][0]*(dat[1][1]*dat[2][2]-dat[2][1]*dat[1][2])-

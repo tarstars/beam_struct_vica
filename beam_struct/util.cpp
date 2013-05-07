@@ -144,6 +144,15 @@ WaveMatrix create_wave_matrix(int n, double a, double f,const Tensor& t,const Ve
 return ret;
 }
 
+Vector3c vectorMultiplic(Vector3c factor1, Vector3c factor2)
+{
+   Vector3c result;
+   result(0)=factor1(1)*factor2(2)-factor1(2)*factor2(1);
+   result(1)=factor1(2)*factor2(0)-factor1(0)*factor2(2);
+   result(2)=factor1(0)*factor2(1)-factor1(1)*factor2(0);
+   return result;
+}
+
 Matrix3 create_tensor_S(const Vector3& k,const Vector3& q){
     Matrix3 res;
     for (int i=0; i<3; i++){
@@ -152,7 +161,7 @@ Matrix3 create_tensor_S(const Vector3& k,const Vector3& q){
         }
     }
     return res;
-};
+}
 
 Matrix3 create_tensor_T (const Matrix3& S, const Tensor& t){
     Matrix3 res;
@@ -168,6 +177,36 @@ Matrix3 create_tensor_T (const Matrix3& S, const Tensor& t){
 
 }
 
+Matrix3_c create_tensor_S_c(const Vector3c& k,const Vector3c& q)
+{
+  Matrix3_c res;
+  for (int i=0; i<3; i++)
+  {
+    for (int j=0; j<3; j++)
+    {
+      res(i,j)=1./2*(q(i)*k(j)+q(j)*k(i));
+    }
+  }
+  return res;
+}
+
+Matrix3_c create_tensor_T_c(const Matrix3_c& S, const Tensor& t)
+{
+  Matrix3_c res;
+  for (int i=0; i<3; i++)
+  {
+    for (int j=0; j<3; j++)
+    {
+      for (int k=0; k<3; k++)
+      {
+        for (int l=0; l<3; l++)
+        {
+          res(i,j)+=t(i,j,k,l)*S(k,l);}
+        }
+      }
+    }
+    return res;
+}
 
 matrixfftw pic_to_mat(string flnm){
     QImage im1(flnm.c_str());

@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "matrix3.h"
+#include "matrix3_c.h"
 
 class PolyMatrix;
 
