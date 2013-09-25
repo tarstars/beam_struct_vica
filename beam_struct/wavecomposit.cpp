@@ -1,4 +1,5 @@
 #include "wavecomposit.h"
+#include "criteria_for_nonhomogenious.h"
 #include "polymatrix.h"
 #include "matrix3.h"
 #include "util.h"
@@ -9,7 +10,7 @@
 
 
 using namespace std;
-ofstream ves("weight.txt");
+//ofstream ves("weight.txt");
 CompositWave::CompositWave()
 {
 }
@@ -17,47 +18,40 @@ CompositWave::CompositWave()
 CompositWave::CompositWave(double s_1, double s_2, const Tensor& t,const Vector3& force, double rho,double omega){
 
   PolyMatrix p=t.make_polyMatrix(rho, s_1, s_2);
- 
   Polinom d;
   d=p.Determinant();
   vector<CD> f;
   f=d.all_roots();
+
+   stringstream dest;
   double eps=1e-6;
   vector<CD> fplus;
-  //vector <double>real_fplus=real_part(fplus);
+  int r=0;
   for (int i=0; i<int(f.size()); i++)
   {
-    if (abs(imag(f[i]))>eps)
+    if ((abs(imag(f[i]))>eps)&&(imag(f[i])<0))
     {
-      stringstream dest;
-    //  cout<<"1imaginary root in compvawe ("<<s_1<<","<<s_2<<")"<<endl;
-      if ((imag(f[i]))>0)
-      {
-        fplus.push_back(f[i]);
-      }
-      cout<<" im "<<endl;
+       PlaneWave_C Pv(s_1,s_2, f[i], p, t, rho, omega);
+       pav[r] = Pv;
+       r++;
     }
-
-    if ((abs(imag(f[i]))<eps)&&(real(f[i])<0))
+    if (abs(imag(f[i]))<eps)
     {
-       fplus.push_back(f[i]);
+         PlaneWave_C Pv(s_1,s_2, f[i], p, t, rho, omega);
+         Vector3c PoitingDir = Pv.T * Pv.q;
+         if (real(PoitingDir(3)) < 0)
+         {
+            pav[r] = Pv;
+            r++;
+         }
     }
   }
 
-  if (fplus.size()!=3)
+  if (r!=3)
   {
-    stringstream dest;
-    dest<<"ne 3 kornya "<<fplus.size()<<endl;
     throw (string(dest.str()));
   }
 
-  // cout<<" "<<fplus<<"  eto korny"<<endl<<endl;
-  //getLog() << *max_element(fplus.begin(), fplus.end())<<"  ";
-
-  for (int r=0; r<3; ++r){
-    pav[r]=PlaneWave_C(s_1,s_2, fplus[r], p, t, rho, omega);
-   // cout<<pav[r];
-  }
 
   Matrix3_c work;
   for (int i=0; i<3; i++){
@@ -68,33 +62,23 @@ CompositWave::CompositWave(double s_1, double s_2, const Tensor& t,const Vector3
     }
   }
 
-  //cout<<" dla vesov "<<endl<<work<<endl;
-  //cout<<endl<<endl;
-  //cout<<"vesa"<<endl;
-  //ves<<" dla vesov "<<endl<<work<<endl;
-  ves<<endl<<endl;
-  ves<<"vesa"<<endl;
-
- /* Vector3 force;
-  force(0)=0.2;
-  force(1)=0.3;
-  force(2)=0.4;
-  force.normalize();*/
 
   std::complex<double> determ=work.det(work);
+  if (abs(determ)<1e-7) throw (string ("zero determinant in composit wave"));
 
-  for (int i=0; i<3; i++){
+  for (int i=0; i<3; i++)
+  {
     Matrix3_c work_dop=work;
-    for (int k=0; k<3; k++){
-    work_dop(k,i)=force(k);}
-    std::complex<double> det_dop=work_dop.det(work_dop);
-      ves<<i<<"  dopolnit. opredelitel "<<det_dop<<endl;
-   ves<<" opredilitel "<<determ<<endl;
-    weight(i)=det_dop/determ;
-    //cout<<weight(i)<<endl;
-    ves<<"x"<<i<<"=det_dop/determ= "<<weight(i)<<endl<<endl;
+    for (int k=0; k<3; k++)
+    {
+      work_dop(k,i)=force(k);
     }
-    cout<<endl<<endl;
+    std::complex<double> det_dop=work_dop.det(work_dop);
+  //  ves<<i<<"  dopolnit. opredelitel "<<det_dop<<endl;
+ //   ves<<" opredilitel "<<determ<<endl;
+    weight(i)=det_dop/determ;
+ //   ves<<"x"<<i<<"=det_dop/determ= "<<weight(i)<<endl<<endl;
+  }
 }
 void
 CompositWave::incrementStorage(Storage& dat, int p, int q,const complex<double>& ampl)const{
@@ -145,6 +129,26 @@ void
 CompositWave::makeShift(double delta_z){
     for (int i=0; i<3; ++i){
         weight(i)*=pav[i].calculate_phase(delta_z);
+    }
+}
+
+int CompositWave::getRootQuantity()const
+{
+   int res=0;
+   Criteria_For_Nonhomogenious type;
+   for (int i=0; i<3; i++)
+   {
+       if (type.needEliminate(this->pav[i])) { res++; }
+   }
+   return res;
+}
+
+void
+CompositWave::eliminate (criteria& type)
+{
+    for (int i=0; i<3; i++)
+    {
+        if ( type.needEliminate(this->pav[i]) ) {this->weight(i) = 0;} // если тип.удалить, т.е .волна другого типа то true
     }
 }
 

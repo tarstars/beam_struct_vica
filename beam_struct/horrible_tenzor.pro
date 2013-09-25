@@ -37,7 +37,10 @@ SOURCES += main.cpp \
     spacialmatrix.cpp \
     vector3c.cpp \
     planewave_c.cpp \
-    matrix3_c.cpp
+    matrix3_c.cpp \
+    criteria.cpp \
+    criteria_for_homogenious.cpp \
+    criteria_for_nonhomogenious.cpp
 
 HEADERS += \
     tensor.h \
@@ -58,4 +61,7 @@ HEADERS += \
     spacialmatrix.h \
     vector3c.h \
     planewave_c.h \
-    matrix3_c.h
+    matrix3_c.h \
+    criteria.h \
+    criteria_for_homogenious.h \
+    criteria_for_nonhomogenious.h

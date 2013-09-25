@@ -2,6 +2,8 @@
 #define WAVEMATRIX_H
 
 #include "waveelement.h"
+#include "criteria.h"
+#include "matrix.h"
 
 #include <fstream>
 #include <vector>
@@ -24,10 +26,15 @@ public:
 
     Storage getStorage()const;
 
+    matrix getRootMap() const;
+
     void logState(std::ostream&);
     void makeShift(double delta_z);
 
     void makeZShift (double);
+
+    void eliminate (criteria& type);
+    void setOneToAll ();
 
     friend std::ostream& operator<<(std::ostream& os, const WaveMatrix&);
 };

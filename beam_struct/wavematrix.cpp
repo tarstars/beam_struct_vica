@@ -53,6 +53,18 @@ for (int p=0; p<n; ++p)
         (*this)(p,q).makeShift(dz);
 };
 
+matrix WaveMatrix::getRootMap() const
+{
+    matrix res(n,n);
+    for (int i=0;i<n;i++)
+    {
+        for (int j=0; j<n; j++)
+        {
+            res(i,j) = (*this)(i,j).getRootQuantity();
+        }
+    }
+    return res;
+}
 
 Storage
 WaveMatrix::getStorage()const{
@@ -64,4 +76,27 @@ WaveMatrix::getStorage()const{
     }
   }
   return dat;
+}
+
+void WaveMatrix::eliminate (criteria& type)
+{
+    for (int i=0; i<(*this).n; i++)
+    {
+      for (int j=0; j<(*this).n; j++)
+      {
+        (*this)(i,j).eliminate (type);
+      }
+    }
+}
+
+
+void WaveMatrix::setOneToAll ()
+{
+    for (int i=0; i<(*this).n; i++)
+    {
+      for (int j=0; j<(*this).n; j++)
+      {
+        (*this)(i,j).setAOne();
+      }
+    }
 }

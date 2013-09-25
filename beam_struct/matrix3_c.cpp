@@ -160,7 +160,11 @@ Vector3c Matrix3_c::calc_pol()const
   {
     alpha[i]=abs(alpha[i]);
   }
-  vector <double> alphaReal=real_part(alpha);
+  vector <double> alphaReal(alpha.size());
+  for (int i=0; i<alpha.size(); i++)
+  {
+      alphaReal[i]=real(alpha[i]);
+  }
   int t=min_element(alphaReal.begin(),alphaReal.end())-alphaReal.begin();
   if(t==1)
   {

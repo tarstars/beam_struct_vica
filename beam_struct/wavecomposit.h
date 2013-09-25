@@ -4,6 +4,7 @@
 #include "planewave.h"
 #include "planewave_c.h"
 #include "vector3c.h"
+#include "criteria.h"
 
 
 class Tensor;
@@ -25,6 +26,8 @@ public:
     void makeShift(double dz);
 
     Vector3c TSum ()const;
+    int getRootQuantity () const;
+    void eliminate(criteria& type);
 
     friend std::ostream& operator<<(std::ostream& os, const CompositWave& r);
    // storage serialize(double p,double q);

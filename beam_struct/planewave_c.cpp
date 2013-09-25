@@ -18,7 +18,6 @@ PlaneWave_C::PlaneWave_C(double s1, double s2, std::complex<double> s3, const Po
     Matrix3_c Matrr=PolyMat.evaluatePolyMatrixC(s3);
     q=Matrr.calc_pol();
     Vector3c vectorTestoviy=Matrr*q;
-    cout<<"root"<<s3<<"  polarization "<<q<<endl<<"testoviy vector "<<vectorTestoviy<<endl<<" matrix "<<Matrr<<endl<<endl;
     S=create_tensor_S_c(k,q);
     T=create_tensor_T_c(S,tens);
 }
@@ -27,12 +26,12 @@ ostream& operator <<(ostream& os,const PlaneWave_C& r){
     //os<<"plane wave:"<<endl; это вывод значений
     // ofstream plane;
     // plane.open("plane.txt");
-    cout<<"plane wave:"<<endl;
-    cout<<"slow: "<<r.slow<<endl<<endl;
-    cout<<"q = "<<r.q<<endl;
-    cout<<"k = "<<r.k<<endl;
-    cout<<"tensor s= "<<r.S<<endl;
-    cout<<"tensor t= "<<r.T<<endl;
+    os<<"plane wave:"<<endl;
+    os<<"slow: "<<r.slow<<endl<<endl;
+    os<<"q = "<<r.q<<endl;
+    os<<"k = "<<r.k<<endl;
+    os<<"tensor s= "<<r.S<<endl;
+    os<<"tensor t= "<<r.T<<endl;
     return os;
 }
 
@@ -106,9 +105,7 @@ PlaneWave_C::logState(ostream& os)const{
 double
 PlaneWave_C::getSqrtV()const{
     double res=real(sqrt(q(0)*conj(q(0))+q(1)*conj(q(1))+q(2)*conj(q(2))));
-    ofstream plane;
-    plane.open("plane.txt");
-    plane<<res<<endl;
+
 return res;
 }
 

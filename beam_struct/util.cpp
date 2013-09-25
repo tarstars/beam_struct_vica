@@ -266,7 +266,7 @@ SpacialMatrix getSpaceMatrix(const Storage& stor){
 }
 
     void saveAsPicture(const matrix& a, string flnm, double gamma){
-        cerr << "saveAsPicture: h = " << a.height() << " w = " << a.width() << endl;
+        cerr << "saveAsPicture: h = " << a.height() << " w = " << a.width()<<flnm << endl;
 
         QImage dest(a.width(), a.height(), QImage::Format_ARGB32_Premultiplied);
 
@@ -281,8 +281,8 @@ SpacialMatrix getSpaceMatrix(const Storage& stor){
                 maxv = max(maxv, v);
             }
 
-       minv=exp((log(minv))*gamma);
-        maxv=exp((log(maxv))*gamma);
+    //   minv=exp((log(minv))*gamma);
+   //     maxv=exp((log(maxv))*gamma);
 
         for(int p = 0; p < h; ++p)
             for(int q = 0; q < w; ++q){

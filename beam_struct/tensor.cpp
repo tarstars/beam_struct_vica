@@ -24,7 +24,8 @@ Tensor::operator>>(ostream& os)const{
         for (int l=0; l<3; ++l){
             for (int i=0; i<3; ++i){
                 for (int k=0; k<3; ++k)
-                    os<< dat[i][j][k][l]<< "  ";
+                   // if (abs(dat[j][l][i][k]) > 1)
+                    os<<" "<< dat[j][l][i][k]<<"  ";
                     os<<"\t";
             }
             os<<endl;
@@ -146,7 +147,7 @@ Tensor::operator>>(ostream& os)const{
   }
 
   Tensor
-  Tensor:: rotation_for_VB_picture( double phi)
+  Tensor:: rotation_for_VB_picture_chang( double phi)
   {
     Matrix3 m;
     Tensor res;
@@ -191,7 +192,7 @@ Tensor::operator>>(ostream& os)const{
   }
 
   Tensor
-  Tensor:: rotation_for_VB_picture_1( double phi)
+  Tensor:: rotation_for_VB_picture_z( double phi)
   {
     Matrix3 m;
     Tensor res;

@@ -42,7 +42,7 @@ Vector3c:: operator*(double c) const{
 void
 Vector3c::normalize()// Vector3::normalize - ф-ция нормалайз принадл. классу вектор3
 {
-  std::complex<double> a =sqrt (x*x+y*y+z*z);
+  std::complex<double> a =sqrt (x*conj(x)+y*conj(y)+z*conj(z));
   x=x/a;
   y=y/a;
   z=z/a;

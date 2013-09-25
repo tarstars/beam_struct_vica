@@ -29,7 +29,9 @@ SpacialMatrix::operator>>(ostream& os)const{
          for (int p=0; p<(stor.depth()); p++){
              for (int q=0; q<(stor.width()); q++){
                  stor(t,p,q)=(*this)(p,q).getSquareAmplitude();
+                 cout<<stor(t,p,q);
              }
+             cout<<endl;
          }
     }
 

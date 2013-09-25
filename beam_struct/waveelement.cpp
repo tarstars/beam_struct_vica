@@ -24,11 +24,22 @@ WaveElement::makeShift(double dz){
     cv.makeShift(dz);
 }
 
+int
+WaveElement::getRootQuantity()const
+{
+    cv.getRootQuantity();
+}
+
 ostream& operator<<(ostream& os, const WaveElement& r){
   os<<"WaveEl: "<<endl;
   os<<"A= "<<r.A<<endl;
   os<<r.cv<<endl;
   return os;
+}
+
+void WaveElement:: eliminate (criteria& type)
+{
+    (*this).cv.eliminate(type);
 }
 
 void

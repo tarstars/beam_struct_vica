@@ -18,7 +18,7 @@ matrix::operator>>(ostream& os)const{
         for (int j=0; j<w; ++j){
                     os<< dat[i*w+j]<< "\t";
             }
-            os<<endl;
+           os<<endl;
             }
     return os;
 }

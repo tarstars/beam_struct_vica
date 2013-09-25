@@ -17,8 +17,8 @@ public:
     const double& operator()(int i, int  j , int k, int l)const{return dat[i][j][k][l];}
     PolyMatrix make_polyMatrix(/*Tensor c,*/ double p, double s_1, double s_2)const;
     Tensor rotation(double phi, char p);
-    Tensor rotation_for_VB_picture(double phi);
-    Tensor rotation_for_VB_picture_1(double phi);
+    Tensor rotation_for_VB_picture_chang(double phi);
+    Tensor rotation_for_VB_picture_z(double phi);
     std::ostream& operator>>(std::ostream& os)const;
 };
 
